@@ -18,4 +18,21 @@ public class MasterServ extends HttpServlet{
 		System.out.println("Master has been pinged.");
 		RequestHelper.process(req, resp);
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("Master has been pinged.");
+		RequestHelper.process(req, resp);
+	}
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("Master has been pinged.");
+		RequestHelper.process(req, resp);
+	}
+	
+	@Override
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("Master has been pinged.");
+		RequestHelper.process(req, resp);
+	}
 }

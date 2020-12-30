@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -34,64 +35,79 @@ public class Routes{
 	
 	public static void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		resp.setContentType("application/json");
+		System.out.println("Routes.doPost has been pinged.");
+		System.out.println(fd.foodList);
+		if(req.getMethod().equals("POST")) {
 		
-		ObjectMapper om = new ObjectMapper();
-		
-		Food p1 = om.readValue(req.getReader(), com.revature.models.Food.class);
-		
-		foodList.add(p1);
+//		int id = Integer.parseInt(req.getParameter("id"));
+			resp.setContentType("application/json");
 
-		resp.getWriter().write(om.writeValueAsString(foodList));
-
-		
+			Food food = om.readValue(req.getReader(), com.revature.models.Food.class);
+			fd.createFood(food);
+			
+			resp.setStatus(200);
+			} else {
+				resp.setStatus(400);
+			}
+			
 	}
+	
 
 	
 	public static void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		Food Food1 = new Food("Celery", 1.99);
-		Food Food2 = new Food("Mango", 3.99);
-		Food Food3 = new Food("Apple", 0.99);
-		
-		foodList.add(Food1);
-		foodList.add(Food2);
-		foodList.add(Food3);
-		
+
+		System.out.println("Route doPut is getting pinged");
+
 		resp.setContentType("application/json");
-		
 		int foodId = Integer.parseInt(req.getParameter("id"));
-		
-		ObjectMapper om = new ObjectMapper();
-		
+		Food food = fd.getFood(foodId);
+				
 		Food p1 = om.readValue(req.getReader(), com.revature.models.Food.class);
 		
-		foodList.remove(foodId);
-		foodList.add(foodId, p1);
-		
-		resp.getWriter().write(om.writeValueAsString(foodList));
-		
+		if(req.getMethod().equals("PUT")) {
+
+			fd.updateFood(food, p1);
+			resp.setStatus(200);
+
+		}else {
+			resp.setStatus(404);
+		}
+					
 	}
+	
 	
 	public static void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		Food Food1 = new Food("Celery", 1.99);
-		Food Food2 = new Food("Mango", 3.99);
-		Food Food3 = new Food("Apple", 0.99);
-		
-		foodList.add(Food1);
-		foodList.add(Food2);
-		foodList.add(Food3);
+		System.out.println("Route doDelete is getting pinged");
+
 		
 		resp.setContentType("application/json");
 		
 		int foodId = Integer.parseInt(req.getParameter("id"));
+		Food food = fd.getFood(foodId);
 		
-		foodList.remove(foodId);
+//		List<Food> food = fd.foodList;
 		
-		ObjectMapper om = new ObjectMapper();
+		if(req.getMethod().equals("DELETE")) {
+			
+			System.out.println(food);
+
+			fd.deleteFood(food);
+			
+			
+			
+//			ObjectMapper om = new ObjectMapper();
+//			resp.getWriter().write(om.writeValueAsString(fd.foodList));
+			
+		}else {
+			resp.setStatus(404);
+		}
+
 		
-		resp.getWriter().write(om.writeValueAsString(foodList));
+		
+
+		
+
 	
 		
 	}

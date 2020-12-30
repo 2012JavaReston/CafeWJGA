@@ -28,22 +28,26 @@ public List<Food> foodList = new ArrayList<Food>();
 
 	@Override
 	public void createFood(Food food) {
-		// TODO Auto-generated method stub
-		
+		Food Food4 = new Food(food.getName(), food.getPrice());
+		foodList.add(Food4);
+
 	}
 
 
 	@Override
-	public void updateFood(Food food) {
-		// TODO Auto-generated method stub
+	public void updateFood(Food food, Food newFood) {
+		
+		deleteFood(food);
+		createFood(newFood);
+		
 		
 	}
 
 
 	@Override
 	public void deleteFood(Food food) {
-		// TODO Auto-generated method stub
 		
+		foodList.remove(foodList.indexOf(food));
 	}
 	
 	

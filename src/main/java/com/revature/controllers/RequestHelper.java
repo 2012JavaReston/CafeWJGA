@@ -16,24 +16,27 @@ public class RequestHelper {
 	case "/CafeWebo/cafe/menu":
 		switch(req.getMethod()){
 			case "GET":
-				System.out.println("ReqHelper is getting pinged.");
+				System.out.println("ReqHelper Get is getting pinged.");
 				Routes.doGet(req, resp);
 				break;
 			case "POST":
+				System.out.println("ReqHelper Post is getting pinged");
 				Routes.doPost(req, resp);
 				break;
 			case "PUT":
+				System.out.println("ReqHelper Put is getting pinged");
 				Routes.doPut(req, resp);
 				break;
 			case "DELETE":
+				System.out.println("ReqHelper Delete is getting pinged");
 				Routes.doDelete(req, resp);
 				break;
 		}
 		break;
-	case "/login":
-		
-		
-		break;
+//	case "/login":
+//		
+//		
+//		break;
 	default:
 		System.out.println("no case selected");
 		break;
